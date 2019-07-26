@@ -73,9 +73,7 @@ Replace the following code of package.json file
  5. Create a **Dockerfile**
     > touch Dockerfile
  6. Dockerfile should look like this
- 
-        ```
-
+    ```
         FROM node:10
         # Create app directory
         WORKDIR /usr/app
@@ -94,4 +92,4 @@ Replace the following code of package.json file
         EXPOSE 3000
         CMD [ "node", "server.js" ]
             
-       ```
+     ```
