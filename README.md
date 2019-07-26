@@ -100,7 +100,7 @@ CMD [ "node", "server.js" ]
 node_modules
 npm-debug.log
 ```
-    This will prvent copying onto docker image.
+   This will prevent from copying onto docker image.
     
 8. Building Docker image
     > docker build -t node-web-app .
