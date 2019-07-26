@@ -16,7 +16,7 @@ Create a simple nodeJs application and deploy it onto a docker container.
   
 This will create a **package.json** file in the folder, that file contains app dependency packages.
 
-Replace the following code of package.json file 
+Replace the following code of package.json
 
 ```js
   // package.json
