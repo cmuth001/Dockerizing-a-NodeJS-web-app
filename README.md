@@ -18,7 +18,7 @@ This will create a **package.json** file in the folder, that file contains app d
 
 Replace the following code of package.json file 
 
-    ```js
+   ```js
       // package.json
 
       {
@@ -34,7 +34,7 @@ Replace the following code of package.json file
           "express": "^4.16.1"
         }
       }
-    ```
+  ```
   2. Running this command will install all the dependencies from package.json 
         > npm install
   3. Lets create a **server.js** file that defines a web-app using an Express framework.
