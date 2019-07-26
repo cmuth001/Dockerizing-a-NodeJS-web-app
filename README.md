@@ -2,7 +2,7 @@
 <p align="center">
     <img
       alt="Node.js"
-      src="https://nodejs.org/static/images/logo-light.svg"
+      src="nodeJsDocker.png"
       width="400"
     />
 </p>
