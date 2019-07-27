@@ -57,6 +57,8 @@ Replace the following code of package.json
 4. Lets test the application, run the below command
     > node server.js
   
+  If you followed the  above steps on your system, you will see the sam output as below image: [http://localhost:3000/](http://localhost:3000/)
+  
       <p align="center">
         <img
           alt="Node.js"
@@ -143,8 +145,7 @@ npm-debug.log
 output: 
     Example app listening on port 3000!
 ```
-    
-13. After running all the above commands, open [http://localhost:49160/](http://localhost:49160/) on the browser
+13. If you followed the  above steps on your system, you will see the sam output as below image: [http://localhost:49160/](http://localhost:49160/)
   
   <p align="center">
         <img
