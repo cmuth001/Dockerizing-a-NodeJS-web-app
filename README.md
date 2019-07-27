@@ -59,19 +59,19 @@ Replace the following code of package.json
   
   If you followed the  above steps on your system, you will see the sam output as below image: [http://localhost:3000/](http://localhost:3000/)
   
-      <p align="center">
-        <img
-          alt="Node.js"
-          src="image1.png"
-          width="400"
-        />
-      </p>
+  <p align="center">
+    <img
+      alt="Node.js"
+      src="image1.png"
+      width="400"
+    />
+  </p>
       
-    Now node.js app is running successfully.
+  Now node.js app is running successfully.
    
-    Lets try running the same node.js application running on the docker container. To run the application on the docker conatiner we need a docker image. 
-   
-    First, we will create a docker image for the application.
+Lets try running the same node.js application running on the docker container. To run the application on the docker conatiner we need a docker image. 
+
+First, we will create a docker image for the application.
    
 5. Create a **Dockerfile**
     > touch Dockerfile
