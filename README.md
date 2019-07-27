@@ -57,7 +57,7 @@ Replace the following code of package.json
 4. Lets test the application, run the below command
     > node server.js
   
-  If you followed the  above steps on your system, you will see the sam output as below image: [http://localhost:3000/](http://localhost:3000/)
+  If you followed the  above steps on your system, you will see the same output as below image: [http://localhost:3000/](http://localhost:3000/)
   
   <p align="center">
     <img
