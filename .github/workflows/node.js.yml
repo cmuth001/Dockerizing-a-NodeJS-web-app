@@ -51,5 +51,4 @@ jobs:
         word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
         echo $word1
         echo $word2
-        docker build -t node-web-app .
-        echo `docker tag node-web-app:latest '"$word2"'`
+        docker build -t $word2 .
