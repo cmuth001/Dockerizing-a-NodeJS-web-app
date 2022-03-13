@@ -53,7 +53,7 @@ jobs:
         echo $word2
         docker build -t $word2 .
         docker push $word2
-    - name: Checkout Project rebob
+    - name: Checkout Project repob
       uses: actions/checkout@master
       with: 
          repository: VkasSharma/repob
