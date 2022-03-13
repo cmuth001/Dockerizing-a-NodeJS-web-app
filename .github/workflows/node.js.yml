@@ -27,3 +27,14 @@ jobs:
     - name: Print new build number
       run: echo "Build number is $BUILD_NUMBER"
       # Or, if you're on Windows: echo "Build number is ${env:BUILD_NUMBER}"
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - run: docker build -t node-web-app:$BUILD_NUMBER .
+    - run: docker run -p 49160:8080 -d node-web-app:$BUILD_NUMBER
