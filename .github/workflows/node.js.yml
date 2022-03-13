@@ -47,6 +47,10 @@ jobs:
       run: |
         pre_build_number=$((${BUILD_NUMBER}-1))
         echo $pre_build_number
+        word1="vikas.naukrichowk.co.in/k8s/node-web-app:${pre_build_number}"
         word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
         echo $word1
         echo $word2
+        docker build node-web-app -t  .
+        docker tag node-web-app:latest '"$word2"'
+        docker push '"$word2"'
