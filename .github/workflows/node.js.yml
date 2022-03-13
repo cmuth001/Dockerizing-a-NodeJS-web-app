@@ -53,3 +53,16 @@ jobs:
         echo $word2
         docker build -t $word2 .
         docker push $word2
+    - name: check repob content
+      run: |
+        cat ./repob/file
+        ls ./repob
+        sed -i 's|'"$word1"'|'"$word2"'|g' ./repob/file
+    - name: Change tag in helm cchart
+      run: |
+        cd ./repob
+        git add .
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git commit -am "Image tag modify after pushing to harbor"
+        git push
