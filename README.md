@@ -1,4 +1,4 @@
-# Dockerizing-a-NodeJS-web-apps
+# Dockerizing-a-NodeJS-web-app
 <p align="center">
     <img
       alt="Node.js"
