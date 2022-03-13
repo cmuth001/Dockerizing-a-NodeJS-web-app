@@ -51,6 +51,8 @@ jobs:
         word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
         echo $word1
         echo $word2
+        docker build -t $word2 .
+        docker push $word2
     - name: Checkout Project repob
       uses: actions/checkout@master
       with: 
@@ -59,10 +61,12 @@ jobs:
          path: ./repob
     - name: check repob content
       run: |
+        pre_build_number=$((${BUILD_NUMBER}-1))
+        echo $pre_build_number
+        word1="vikas.naukrichowk.co.in/k8s/node-web-app:${pre_build_number}"
+        word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
         cat ./repob/file
         ls ./repob
-        echo $word1
-        echo $word2
         sed -i 's|'"$word1"'|'"$word2"'|g' ./repob/file
     - name: Change tag in helm cchart
       run: |
