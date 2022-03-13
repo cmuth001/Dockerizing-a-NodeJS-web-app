@@ -53,6 +53,12 @@ jobs:
         echo $word2
         docker build -t $word2 .
         docker push $word2
+    - name: Checkout Project rebob
+      uses: actions/checkout@master
+      with: 
+         repository: VkasSharma/repob
+         token: ${{ secrets.ACTIONS_TOKEN }}
+         path: ./repob
     - name: check repob content
       run: |
         cat ./repob/file
