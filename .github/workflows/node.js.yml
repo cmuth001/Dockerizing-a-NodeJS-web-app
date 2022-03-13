@@ -20,6 +20,29 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Generate build number
+      uses: einaregilsson/build-number@v3
+      with:
+        token: ${{secrets.github_token}}        
+    - name: Print new build number
+      run: |
+        echo "Build number is $BUILD_NUMBER"
+        Build_Number=$BUILD_NUMBER
+    - uses: actions/checkout@v2
+    - name: first check
+      run: |
+        ls
+        pwd
+    - name: Find and Replace
+      uses: jacobtomlinson/gha-find-replace@v2
+      with:
+        find: "image"
+        replace: "world"
+        include: "**values.yaml"
+    - name: final check
+      run: |
+        ls
+        pwd
     - uses: actions/checkout@v2
     - name: Login to harbor Container Registry
       uses: docker/login-action@v1
@@ -27,6 +50,36 @@ jobs:
         registry: vikas.naukrichowk.co.in
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Checkout Project rebob
+      uses: actions/checkout@master
+      with: 
+         repository: VkasSharma/repob
+         token: ${{ secrets.ACTIONS_TOKEN }}
+         path: ./repob
+    - name: check repob content
+      run: |
+        cat ./repob/file
+        ls ./repob
+    - name: Find and Replace
+      run: |
+        pre_build_number=$((${BUILD_NUMBER}-1))
+        echo $pre_build_number
+        word1="vikas.naukrichowk.co.in/k8s/node-web-app:${pre_build_number}"
+        word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
+        echo $word1
+        echo $word2
+        docker build -t '"$word1"' .
+        docker tag node-web-app:latest '"$word2"'
+        docker push '"$word2"'
+        sed -i 's|'"$word1"'|'"$word2"'|g' ./repob/file
+    - name: Change tag in helm cchart
+      run: |
+        cd ./repob
+        git add .
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git commit -am "Image tag modify after pushing to harbor"
+        git push
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
@@ -35,6 +88,3 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    - run: docker build -t node-web-app .
-    - run: docker tag node-web-app:latest vikas.naukrichowk.co.in/k8s/node-web-app:02
-    - run: docker push vikas.naukrichowk.co.in/k8s/node-web-app:02
