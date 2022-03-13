@@ -52,5 +52,4 @@ jobs:
         echo $word1
         echo $word2
         docker build -t node-web-app .
-        docker tag node-web-app:latest '"$word2"'
-        docker push '"$word2"'
+        echo `docker tag node-web-app:latest '"$word2"'`
