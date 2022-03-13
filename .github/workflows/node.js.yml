@@ -52,3 +52,4 @@ jobs:
         echo $word1
         echo $word2
         docker build -t $word2 .
+        docker push $word2
