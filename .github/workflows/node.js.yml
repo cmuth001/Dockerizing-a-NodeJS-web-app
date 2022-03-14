@@ -55,7 +55,7 @@ jobs:
       run: |
         pre_build_number=$((${BUILD_NUMBER}-1))
         echo $pre_build_number
-        word1="vikas.naukrichowk.co.in/k8s/node-web-app:"*
+        word1="vikas.naukrichowk.co.in/k8s/node-web-app:"
         word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
         cat ./repob/file
         ls ./repob
