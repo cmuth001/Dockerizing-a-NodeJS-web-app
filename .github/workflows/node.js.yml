@@ -1,0 +1,70 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and--framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - name: Generate build number
+      uses: VkasSharma/build-number@v3
+      with:
+        token: ${{secrets.github_token}}        
+    - name: Print new build number
+      run: |
+        echo "Build number is $BUILD_NUMBER"
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - uses: actions/checkout@v2
+    - name: Build Docker Image with latest Build Number
+      run: |
+        pre_build_number=$((${BUILD_NUMBER}-1))
+        echo $pre_build_number
+        word1="vikas.naukrichowk.co.in/k8s/node-web-app:${pre_build_number}"
+        word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
+        echo $word1
+        echo $word2
+    - name: Checkout Project repob
+      uses: actions/checkout@master
+      with: 
+         repository: VkasSharma/repob
+         token: ${{ secrets.ACTIONS_TOKEN }}
+         path: ./repob
+    - name: check repob content
+      run: |
+        pre_build_number=$((${BUILD_NUMBER}-1))
+        echo $pre_build_number
+        word1="vikas.naukrichowk.co.in/k8s/node-web-app:.*"
+        word2="vikas.naukrichowk.co.in/k8s/node-web-app:${BUILD_NUMBER}"
+        cat ./repob/file
+        ls ./repob
+        sed -i 's|'"$word1"'|'"$word2"'|g' ./repob/file
+    - name: Change tag in helm cchart
+      run: |
+        cd ./repob
+        git add .
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git commit -am "Image tag modify after pushing to harbor"
+        git push
