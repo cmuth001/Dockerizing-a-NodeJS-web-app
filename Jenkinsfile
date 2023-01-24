@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-      	sh 'docker build -t firstversion/nodejs-app:latest .'
+      	sh "docker build -t firstversion/nodejs-app:latest ."
       }
     }
     stage('Docker Push') {
