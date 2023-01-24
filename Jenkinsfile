@@ -2,16 +2,18 @@
 
 pipeline {
   agent any
+  
+  tools {nodejs "node"}
+  
   stages {
     stage('build stage') {
       steps {
-        cd ./Dockerizing-a-NodeJS-web-app
-        sh 'npm install'
+        bat 'npm install'
       }
     }
     stage('run stage') {
       steps {
-        sh 'node server.js'
+        bat 'node server.js'
       }
     }
     stage('Docker Build') {
