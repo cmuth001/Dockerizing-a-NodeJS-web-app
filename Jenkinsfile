@@ -17,11 +17,6 @@ pipeline {
         bat 'npm test'
       }
     }
-    stage('run stage') {
-      steps {
-        bat 'node server.js'
-      }
-    }
     stage('Docker Build') {
       steps {
       	bat "docker build -t firstversion/nodejs-app:latest ."
