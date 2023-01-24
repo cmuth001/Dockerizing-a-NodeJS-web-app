@@ -6,8 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest",
-    "test-w": "jest --watchAll"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "express": "^4.16.1"
