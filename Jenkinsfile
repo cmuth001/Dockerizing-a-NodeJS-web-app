@@ -12,6 +12,11 @@ pipeline {
         bat 'npm install'
       }
     }
+    stage('test stage') {
+      steps {
+        bat 'npm test'
+      }
+    }
     stage('run stage') {
       steps {
         bat 'node server.js'
