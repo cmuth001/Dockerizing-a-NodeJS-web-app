@@ -5,16 +5,15 @@ pipeline {
   stages {
     stage('build stage') {
       steps {
-        npm install
+        sh 'npm install'
       }
     }
     stage('run stage') {
       steps {
-        node server.js
+        sh 'node server.js'
       }
     }
     stage('Docker Build') {
-    	agent any
       steps {
       	sh 'docker build -t firstversion/nodejs-app:latest .'
       }
