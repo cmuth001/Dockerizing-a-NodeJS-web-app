@@ -3,6 +3,15 @@
 pipeline {
 	agent any 
   stages {
+    stage('build stage') {
+      steps {
+        sh 'pwd'
+        npm install
+      }
+    stage('run stage') {
+      steps {
+        node server.js
+      }
     stage('Docker Build') {
     	agent any
       steps {
