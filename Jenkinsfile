@@ -5,7 +5,6 @@ pipeline {
   stages {
     stage('build stage') {
       steps {
-        pwd
         npm install
       }
     }
