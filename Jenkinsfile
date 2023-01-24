@@ -14,7 +14,7 @@ pipeline {
     }
     stage('test stage') {
       steps {
-        bat 'npm test --forceExit --detectOpenHandles'
+        bat 'npm test --detectOpenHandles'
       }
     }
     stage('Docker Build') {
