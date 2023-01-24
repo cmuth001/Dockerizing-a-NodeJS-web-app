@@ -5,6 +5,7 @@ pipeline {
   stages {
     stage('build stage') {
       steps {
+        cd ./Dockerizing-a-NodeJS-web-app
         sh 'npm install'
       }
     }
