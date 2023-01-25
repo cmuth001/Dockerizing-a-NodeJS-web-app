@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-      	bat "docker build -t mytestacr:nodejsapp-v1 ."
+      	bat "docker build -t nodejsapp-v1 ."
       }
     }
     stage('Docker Push') {
