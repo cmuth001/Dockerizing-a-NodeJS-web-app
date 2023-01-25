@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-      	bat "docker build -t firstversion/nodejs-app:latest ."
+      	bat "docker build -t ksvadrevu/firstversion:v1.0 ."
       }
     }
     stage('Docker Push') {
@@ -27,7 +27,7 @@ pipeline {
       steps {
       	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         	bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          bat "docker push firstversion/nodejs-app:latest"
+          bat "docker push ksvadrevu/firstversion:v1.0"
         }
       }
     }
