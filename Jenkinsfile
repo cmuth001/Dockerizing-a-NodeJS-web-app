@@ -19,7 +19,8 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-      	bat "docker build -t nodejsapp-v1 ."
+      	bat "docker build -t ksvadrevu/mytestacr:nodejsapp-v1 ."
+        bat "docker image ls"
       }
     }
     stage('Docker Push') {
@@ -27,7 +28,7 @@ pipeline {
       steps {
       	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         	bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          bat "docker push nodejsapp-v1"
+          bat "docker image push"
         }
       }
     }
