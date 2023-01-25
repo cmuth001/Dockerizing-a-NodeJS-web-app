@@ -32,5 +32,12 @@ pipeline {
         }
       }
     }
+    stage('Create Cluster') {
+      steps {
+        bat "az account set -s 9342e2c2-c6de-4154-ad60-6053ed21752f"
+        bat "az aks create -g storage-rg-free -n jenkins-nodejs-deploy --node-count 2"
+        bat "winget install -e --id Kubernetes.kubectl"
+      }
+    }
   }
 }
