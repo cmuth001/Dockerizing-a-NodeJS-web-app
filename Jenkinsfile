@@ -43,7 +43,7 @@ pipeline {
         bat "kubectl get secret hubcred --output=yaml"
         */
         bat "kubectl apply -f deployment.yaml"
-        bat "kubectl get service service-nodejs --watch"
+        bat "kubectl get service service-nodejs"
       }
     }
   }
