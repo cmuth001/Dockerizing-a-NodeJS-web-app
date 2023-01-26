@@ -35,8 +35,12 @@ pipeline {
     stage('Create Cluster') {
       steps {
         bat "az account set -s 9342e2c2-c6de-4154-ad60-6053ed21752f"
-        bat "winget install -e --id Kubernetes.kubectl"
+        /*bat "winget install -e --id Kubernetes.kubectl"
+        */
         bat "az aks get-credentials -g jenkins-test-rg -n jenkins-nodejs-deploy --admin"
+        bat "kubectl get nodes"
+        bat "kubectl -f deployment.yaml"
+        bat "kubectl get service nodejs-service --watch"
       }
     }
   }
