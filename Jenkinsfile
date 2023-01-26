@@ -39,10 +39,11 @@ pipeline {
         */
         bat "az aks get-credentials -g jenkins-test-rg -n jenkins-nodejs-deploy --admin"
         bat "kubectl get nodes"
-        bat "kubectl create secret docker-registry dockerHub --docker-server=https://index.docker.io/v1/ --docker-username=${env.dockerHubUser} --docker-password=${env.dockerHubUser} --docker-email=svadrevukarthik@gmail.com"
-        bat "kubectl get secret dockerHub --output=yaml"
-        bat "kubectl -f deployment.yaml"
-        bat "kubectl get service nodejs-service --watch"
+        /*bat "kubectl create secret docker-registry dockerHub --docker-server=https://index.docker.io/v1/ --docker-username=${env.dockerHubUser} --docker-password=${env.dockerHubUser} --docker-email=svadrevukarthik@gmail.com"
+        bat "kubectl get secret hubcred --output=yaml"
+        */
+        bat "kubectl apply -f deployment.yaml"
+        bat "kubectl get service service-nodejs --watch"
       }
     }
   }
