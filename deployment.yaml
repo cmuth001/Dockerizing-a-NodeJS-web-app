@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs
+  labels:
+    app: nodejs
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - image: ksvadrevu/mytestacr:nodejsapp-v1
+        name: nodejs
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "400m"
+      imagePullSecrets:
+      - name: hubcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nodejs
+  labels:
+    app: nodejs
+spec:
+  type: LoadBalancer
+  selector:
+    app: nodejs
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
