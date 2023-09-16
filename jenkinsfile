@@ -1,0 +1,22 @@
+pipeline{
+    agent any
+    stages{
+        stage('build and push'){
+            steps{
+                sh '''
+                whoami
+                aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 191719037956.dkr.ecr.eu-north-1.amazonaws.com
+                docker build -t 191719037956.dkr.ecr.eu-north-1.amazonaws.com/nodejss:${BUILD_NUMBER}
+                docker push 191719037956.dkr.ecr.eu-north-1.amazonaws.com/nodejss:${BUILD_NUMBER}
+                '''     
+            }
+        }
+        stage('deploy'){
+            step{
+                sh'''
+                ssh -i /var/lib/jenkins/public.pem -o StrictHostKeyChecking=no ubuntu@ec2-51-20-63-47.eu-north-1.compute.amazonaws.com 'bash -s' < ./deploy.sh \${BUILD_NUMBER} 
+                '''
+            }
+        }
+    }
+}
